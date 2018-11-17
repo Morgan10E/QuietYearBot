@@ -1,0 +1,76 @@
+{
+    "map_setup" : "Welcome to Quiet Year! This is a map game based primarily in your *imagination*. You and your friends are collectively the will of a small group of people. Before you begin living through the quiet year, you will take turns adding some features to your currently empty map. Use crude drawings or icons on the map itself - try not to use words. Use your words instead to describe what the feature is when you pass the map to the next player. After each of you has added a feature, enter the !continue command.",
+    "resource_setup": "",
+    "scarcity_abundance": "",
+    "how_to_play": "",
+    "dramatic_intro": "*\"For a long time, we were at war with The Jackals. But now, we’ve driven them off, and we have this – a year of relative peace. One quiet year, with which to build our community up and learn once again how to work together. Come Winter, the Frost Shepherds will arrive and we might not survive beyond that. But we don’t know about that yet. What we know is that right now, in this moment, there is an opportunity to build something.*\"",
+    "deck_order": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+    ],
+    "deck": {
+        "spring": [
+            {
+                "content": [
+                    "You see a good omen. What is it?",
+                    "You see a bad omen. What is it?"
+                ]
+            },
+            {
+                "content": [
+                    "What's the most beautiful thing in this area?",
+                    "What's the most hideous thing in this area?"
+                ]
+            }
+        ],
+        "summer": [
+            {
+                "content": [
+                    "The eldest among you dies. What caused the death?",
+                    "The eldest among you is very sick. Caring for them and searching for a cure requires the help of the entire community. Do not reduce project dice this week."
+                ]
+            },
+            {
+                "content": [
+                    "Someone new arrives. Who? Why are they in distress?",
+                    "Someone leaves the community. Who? What are they looking for?"
+                ]
+            }
+        ],
+        "autumn": [
+            {
+                "content": [
+                    "Someone sabotages a project, and the project fails as a result. Who did this? Why?",
+                    "Someone is caught trying to sabotage the efforts of the community. How does the community respond?"
+                ]
+            },
+            {
+                "content": [
+                    "Someone leaves the community after issuing a dire warning. Who? What is the warning?",
+                    "Someone issues a dire warning, and the community leaps into action to avoid disaster. What is the warning? Start a contentious project that relates to it."
+                ]
+            }
+        ],
+        "winter": [
+            {
+                "content": [
+                    "What is winter like in this area? How do community members react to the weather?"
+                ]
+            },
+            {
+                "content": [
+                    "Winter elements destroy a food source. If this was your only food source, add a Scarcity.",
+                    "Winter elements leave everyone cold, tired, and miserable. Project dice are not reduced this week."
+                ]
+            },
+            {
+                "game_ender": true,
+                "content": [
+                    "The Frost Shepherds arrive. The game is over."
+                ]
+            }
+        ]
+    }
+}
