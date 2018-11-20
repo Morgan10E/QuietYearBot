@@ -221,7 +221,7 @@ bot.on('message', function (message) {
                             if (projects[player].length == 0) continue;
                             response += player + '\n';
                             for (var i = 0; i < projects[player].length; i++) {
-                                response += '\t' + (i+1) + '. ' + projects[player][i].description + ' (' + projects[player][i].weeks + ' weeks remaining)';
+                                response += '\t' + (i+1) + '. ' + projects[player][i].description + ' (' + projects[player][i].weeks + ' weeks remaining)\n';
                             }
                         }
                     } else if (args.length == 1) {
