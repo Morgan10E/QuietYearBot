@@ -1,8 +1,8 @@
 {
-    "map_setup" : "Welcome to Quiet Year! This is a map game based primarily in your *imagination*. You and your friends are collectively the will of a small group of people. Before you begin living through the quiet year, you will take turns adding some features to your currently empty map. Use crude drawings or icons on the map itself - try not to use words. Use your words instead to describe what the feature is when you pass the map to the next player. After each of you has added a feature, enter the !continue command.",
-    "resource_setup": "",
-    "scarcity_abundance": "",
-    "how_to_play": "",
+    "map_setup" : "Welcome to Quiet Year! This is a map game based primarily in your *imagination*. You and your friends are collectively the will of a small group of about 60-80 people. Before you begin living through the quiet year, each take a turn adding a feature to your currently empty map. Use crude drawings or icons on the map itself - try not to use words. Use your words instead to describe what the feature is when you pass the map to the next player. After each of you has added a feature, enter the !continue command.",
+    "resource_setup": "Next, each player decides one resource that could be abundant or scarce. Picking a resource makes it important - it is something that your community wants and needs. Enter the !continue command when you're done.",
+    "scarcity_abundance": "Now choose one resource to be in abundance and one resource to be scarce. The player who proposed the abundant resource should add it to the map, and then the player who proposed the scarce resource should add it to the map. Remember to use only drawings and symbolic representations.",
+    "how_to_play": "Each turn, you will be given a prompt. Follow all bold instructions. If you choose an option that does not prevent projects from ticking down, enter the **!countdown** command. You may act on any projects that ended. You may then take one of three actions: \n\t**1.** Discover something new. Introduce a situation and add it to the map. \n\t**2.** Hold a discussion. Choose a topic. Every player, in order, will weigh in once, ending with you (enter **!turn** to see who should weigh in first).\n\t**3.** Start a project. Declare roughly how long it should take. Add it to be tracked with **!project <duration> <description>**.\n\nIf it is not your turn and you dislike the action a player has taken, use **!contempt**. You can spend contempt (using **!withdraw**) if you want to act selfishly on your turn later, or if the reason for the contempt is later resolved.\n\nTo update the map, download the latest posted one and scribble on it with an editor of your choice (such as MS Paint) and reupload your new version.",
     "dramatic_intro": "*\"For a long time, we were at war with The Jackals. But now, we’ve driven them off, and we have this – a year of relative peace. One quiet year, with which to build our community up and learn once again how to work together. Come Winter, the Frost Shepherds will arrive and we might not survive beyond that. But we don’t know about that yet. What we know is that right now, in this moment, there is an opportunity to build something.*\"",
     "deck_order": [
         "spring",
@@ -29,7 +29,7 @@
             {
                 "content": [
                     "The eldest among you dies. What caused the death?",
-                    "The eldest among you is very sick. Caring for them and searching for a cure requires the help of the entire community. Do not reduce project dice this week."
+                    "The eldest among you is very sick. Caring for them and searching for a cure requires the help of the entire community. **Do not reduce project dice this week.**"
                 ]
             },
             {
@@ -49,7 +49,7 @@
             {
                 "content": [
                     "Someone leaves the community after issuing a dire warning. Who? What is the warning?",
-                    "Someone issues a dire warning, and the community leaps into action to avoid disaster. What is the warning? Start a contentious project that relates to it."
+                    "Someone issues a dire warning, and the community leaps into action to avoid disaster. What is the warning? **Start a contentious project that relates to it.**"
                 ]
             }
         ],
@@ -62,7 +62,7 @@
             {
                 "content": [
                     "Winter elements destroy a food source. If this was your only food source, add a Scarcity.",
-                    "Winter elements leave everyone cold, tired, and miserable. Project dice are not reduced this week."
+                    "Winter elements leave everyone cold, tired, and miserable. **Project dice are not reduced this week.**"
                 ]
             },
             {

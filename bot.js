@@ -1,22 +1,12 @@
-var Discord = require('discord.io');
-var logger = require('winston');
+var Discord = require('discord.js');
 var auth = require('./auth.json');
 var info = require('./info.json');
 var deck = info.deck;
 var seasons = info.deck_order;
 
-// Configure logger settings
-logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, {
-    colorize: true
-});
-logger.level = 'debug';
-
 // Initialize Discord Bot
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
-});
+var bot = new Discord.Client();
+
 bot.on('ready', function (evt) {
     console.log('Ready!');
 });
@@ -45,6 +35,7 @@ var reset = function() {
 
 var commands = {
     'help' : 'Display these commands.',
+    'instructions': 'Print the \'How to Play\'',
     'start' : 'Start a new game. !start',
     'end' : 'Finish this game. !end',
     'register' : 'Sign up to play. !register',
@@ -54,34 +45,42 @@ var commands = {
     'withdraw': 'Get rid of contempt to justify a selfish action or because a conflict was resolved. !withdraw',
     'project': 'Start a project that will take longer than a week, or terminate a project. !project <#weeks> <description>, !project <id>',
     'countdown': 'Mark down a week for all projects. !countdown',
-    'turn': 'Whose turn is it? !turn'
+    'turn': 'Whose turn is it? !turn',
+    'continue': 'Continue to the next part of setup. !continue',
 };
 
-bot.on('message', function (user, userID, channelID, message, evt) {
+bot.on('message', function (message) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-        var args = message.substring(1).split(' ');
+    if (message.content.substring(0, 1) == '!') {
+        var args = message.content.substring(1).split(' ');
         var cmd = args[0];
        
         if (!commands[cmd]) {
-            bot.sendMessage({
-                to: channelID,
-                message: 'Invalid command: ' + cmd
-            });
+            message.channel.send('Invalid command: ' + cmd);
             return;
         }
         console.log(cmd);
 
+        var user = message.author;
+
         var response = '';
+        var files = [];
+
+        var flush = function() {
+            if (response != '' || files.length > 0) {
+                message.channel.send(response, { files: files });
+                response = '';
+                files = [];
+            }
+        };
 
         args = args.splice(1);
         switch(cmd) {
-            // !ping
             case 'help':
                 response = 'Possible commands in Quiet Year. Type !<command>.\n';
                 for (var command in commands) {
-                    response += command + ': ' + commands[command] + '\n';
+                    response += '**' + command + ':** ' + commands[command] + '\n';
                 }
             break;
             case 'start':
@@ -90,16 +89,26 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 } else if (players.length == 0) {
                     response = 'Can\'t play without players! Type !register to sign up for the game, then !start when everyone is signed up.';
                 } else {
-                    response = 'Starting a game with players:\n';
+                    response += info.map_setup;
                     for (var i = 0; i < players.length; i++) {
                         response += '\t' + players[i] + '\n';
                         projects[players[i]] = [];
                         contempt[players[i]] = 0;
                     }
-                    response += info.intro;
 
-                    response += '\nWhen you\'ve finished getting the map ready, ' + players[currentPlayer] + ' will draw the first card. See where the story takes you!';
+                    files.push('./blank.png');
 
+                    state = 'map_setup';
+                }
+            break;
+            case 'continue':
+                if (state == 'map_setup') {
+                    response += info.resource_setup;
+                    state = 'resources';
+                } else if (state == 'resources') {
+                    response += info.scarcity_abundance;
+                    response += 'When you\'ve finished adding abundance and scarcity, ' + players[currentPlayer] + ' will draw the first card. See where the story takes you!\n\n';
+                    response += info.dramatic_intro;
                     state = 'playing';
                 }
             break;
@@ -246,12 +255,19 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
                 break;
             case 'turn':
-                response = 'It\'s ' + players[currentPlayer] + '\'s turn.';
+                if (state == 'playing') {
+                    response = 'It\'s ' + players[currentPlayer] + '\'s turn.';
+                } else {
+                    response = 'The game is not currently in progress.';
+                }
                 break;
-         }
-        bot.sendMessage({
-            to: channelID,
-            message: response
-        });
+            case 'instructions':
+                response += info.how_to_play;
+                break;
+        }
+        
+        flush();
      }
 });
+
+bot.login(auth.token);
