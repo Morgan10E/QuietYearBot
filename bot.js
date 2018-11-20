@@ -47,6 +47,7 @@ var commands = {
     'countdown': 'Mark down a week for all projects. !countdown',
     'turn': 'Whose turn is it? !turn',
     'continue': 'Continue to the next part of setup. !continue',
+    'done': 'You\'ve finished your turn and the next player can draw. !draw'
 };
 
 bot.on('message', function (message) {
@@ -91,7 +92,7 @@ bot.on('message', function (message) {
                 } else {
                     response += info.map_setup;
                     for (var i = 0; i < players.length; i++) {
-                        response += '\t' + players[i] + '\n';
+                        response += '\n\t' + players[i];
                         projects[players[i]] = [];
                         contempt[players[i]] = 0;
                     }
@@ -180,12 +181,16 @@ bot.on('message', function (message) {
                         if (card.game_ender) {
                             response = '';
                             reset();
-                        } else {
-                            response += '\n\nAfter ' + players[currentPlayer] + ', it will be ';
-                            currentPlayer = (currentPlayer + 1) % players.length;
-                            response += players[currentPlayer] + '\'s turn.';
                         }
                     }
+                }
+            break;
+            case 'done':
+                if (user != players[currentPlayer]) {
+                    response = 'It\'s ' + players[currentPlayer] + '\'s turn.';
+                } else {
+                    currentPlayer = (currentPlayer + 1) % players.length;
+                    response += players[currentPlayer] + '! It\'s your turn.';
                 }
             break;
             case 'contempt':
